@@ -11,4 +11,15 @@ namespace GameCurrency
     {
         public BlobArray<int> Value;
     }
+
+    [InternalBufferCapacity(8)]
+    public struct CurrencyEntityReferenceBufferElement : IBufferElementData
+    {
+        public Entity Value;
+
+        public static implicit operator CurrencyEntityReferenceBufferElement(Entity value)
+        {
+            return new CurrencyEntityReferenceBufferElement { Value = value };
+        }
+    }
 }
