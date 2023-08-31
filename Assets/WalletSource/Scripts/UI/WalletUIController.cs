@@ -10,16 +10,12 @@ public class WalletUIController : MonoBehaviour
     [SerializeField] private CurrencyWidget[] currencyWidgets;
 
     private EntityManager entityManager;
-    private EntityArchetype currencyChangeEvent;
-    private EntityArchetype currencyResetEvent;
 
     private SendUIWalletChangesSystem sendChangesSystem;
 
     private void Start()
     {
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        currencyChangeEvent = entityManager.CreateArchetype(typeof(CurrencyId),typeof(CurrencyChangeEvent));
-        currencyResetEvent = entityManager.CreateArchetype(typeof(CurrencyId), typeof(CurrencyResetEvent));
     }
 
     private void OnEnable()
@@ -53,17 +49,17 @@ public class WalletUIController : MonoBehaviour
     private void IncrementCurrency(int value, CurrencyType currencyType)
     {
         Debug.Log($"Increment {value} {currencyType}");
-        var currencyChangeEventEntity = entityManager.CreateEntity(currencyChangeEvent);
-        entityManager.SetComponentData(currencyChangeEventEntity, new CurrencyId { Id = (int)currencyType });
-        entityManager.SetComponentData(currencyChangeEventEntity, new CurrencyChangeEvent { Value = value });
+        var currencyChangeEventEntity = entityManager.CreateEntity();
+        entityManager.AddComponentData(currencyChangeEventEntity, new CurrencyId { Id = (int)currencyType });
+        entityManager.AddComponentData(currencyChangeEventEntity, new CurrencyChangeEvent { Value = value });
     }
 
     private void ResetCurrency(CurrencyType currencyType)
     {
         Debug.Log($"Reset {currencyType}");
-        var currencyResetEventEntity = entityManager.CreateEntity(currencyResetEvent);
-        entityManager.SetComponentData(currencyResetEventEntity, new CurrencyId { Id = (int)currencyType });
-        entityManager.SetComponentData(currencyResetEventEntity, new CurrencyResetEvent());
+        var currencyResetEventEntity = entityManager.CreateEntity();
+        entityManager.AddComponentData(currencyResetEventEntity, new CurrencyId { Id = (int)currencyType });
+        entityManager.AddComponentData(currencyResetEventEntity, new CurrencyResetEvent());
     }
 
     private void SetWidgetAmountCurrency(CurrencyType currencyType, int amount)

@@ -18,8 +18,6 @@ namespace GameCurrency
 
         private ILoader loader;
 
-        private EntityArchetype currencyLoadEvent;
-        private EntityArchetype currencySaveEvent;
         private EntityManager entityManager;
         private GetCurrencyAmountSystem getCurrencyAmountSystem;
         private SetCurrencyAmountSystem setCurrenciesAmountSystem;
@@ -41,8 +39,6 @@ namespace GameCurrency
         private void Start()
         {
             entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-            currencyLoadEvent = entityManager.CreateArchetype(typeof(SetCurrenciesAmountEvent));
-            currencySaveEvent = entityManager.CreateArchetype(typeof(GetCurrenciesAmountEvent));
         }
 
         private void OnEnable()
@@ -62,8 +58,8 @@ namespace GameCurrency
 
         private void OnClickSaveButton()
         {
-            var currencySaveEventEntity = entityManager.CreateEntity(currencySaveEvent);
-            entityManager.SetComponentData(currencySaveEventEntity, new GetCurrenciesAmountEvent());
+            var currencySaveEventEntity = entityManager.CreateEntity();
+            entityManager.AddComponentData(currencySaveEventEntity, new GetCurrenciesAmountEvent());
         }
 
         private void SaveCurrenciesAmount(Dictionary<int, int> hashMap)
@@ -89,8 +85,8 @@ namespace GameCurrency
                 }
                 
                 setCurrenciesAmountSystem.currenciesHashMap = currencyHashMap;
-                var currencyLoadEventEntity = entityManager.CreateEntity(currencyLoadEvent);
-                entityManager.SetComponentData(currencyLoadEventEntity, new SetCurrenciesAmountEvent());
+                var currencyLoadEventEntity = entityManager.CreateEntity();
+                entityManager.AddComponentData  (currencyLoadEventEntity, new SetCurrenciesAmountEvent());
             }
 
             loader.Load(LoadingDoneCallback);
