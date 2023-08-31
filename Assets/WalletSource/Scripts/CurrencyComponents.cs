@@ -12,6 +12,7 @@ namespace GameCurrency
         public int Amount;
     }
 
+    public struct CurrencyHasChangedTag : IComponentData {}
     public struct CurrencyChangeEvent : IComponentData
     {
         public int Value;
@@ -19,5 +20,7 @@ namespace GameCurrency
 
     public struct CurrencyResetEvent : IComponentData {}
 
-    public struct CurrencyHasChanged : IComponentData {}
+    public struct GetCurrenciesAmountEvent : IComponentData {}
+
+    public struct SetCurrenciesAmountEvent : IComponentData {}
 }

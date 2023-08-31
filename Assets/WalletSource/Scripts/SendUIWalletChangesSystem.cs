@@ -17,11 +17,11 @@ namespace GameCurrency
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
-            foreach (var (changed, currencyID, amount, entity) in SystemAPI.Query<RefRW<CurrencyHasChanged>, CurrencyId, CurrencyAmount>().WithEntityAccess())
+            foreach (var (changed, currencyID, amount, entity) in SystemAPI.Query<RefRW<CurrencyHasChangedTag>, CurrencyId, CurrencyAmount>().WithEntityAccess())
             {
                 OnAmountCurrencyChanged?.Invoke((CurrencyType)currencyID.Id, amount.Amount);
 
-                ecb.RemoveComponent<CurrencyHasChanged>(entity);
+                ecb.RemoveComponent<CurrencyHasChangedTag>(entity);
             }
 
             ecb.Playback(EntityManager);

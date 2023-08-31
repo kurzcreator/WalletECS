@@ -1,8 +1,10 @@
 using GameCurrency;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public interface ILoader
 {
-    bool Load(Dictionary<CurrencyType, int> data);
-    bool Save(Dictionary<CurrencyType, int> data);
+    void Load(Action<Dictionary<CurrencyType,int>> action);
+    void Save(Dictionary<CurrencyType, int> data);
 }

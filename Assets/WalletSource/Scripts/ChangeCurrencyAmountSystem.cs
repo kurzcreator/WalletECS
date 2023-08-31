@@ -30,7 +30,7 @@ public partial class ChangeCurrencyAmountSystem : SystemBase
                     var amount = SystemAPI.GetComponent<CurrencyAmount>(currency).Amount + eventCurrency.ValueRO.Value;
                     var amountComponent = new CurrencyAmount { Amount = amount };
                     ecb.SetComponent(currency, amountComponent);
-                    ecb.AddComponent<CurrencyHasChanged>(currency);
+                    ecb.AddComponent<CurrencyHasChangedTag>(currency);
 
                     break;
                 }

@@ -1,41 +1,39 @@
-using Unity.Entities;
+using System;
+using System.Collections.Generic;
 using Unity.Collections;
+using Unity.Entities;
 
 namespace GameCurrency
 {
-    public partial class ResetCurrencyAmountSystem : SystemBase
+    public partial class GetCurrencyAmountSystem : SystemBase
     {
+        public event Action<Dictionary<int, int>> OnAmountGetRequestDone;
         protected override void OnCreate()
         {
             base.OnCreate();
             RequireForUpdate<UsedCurrencyList>();
         }
-
         protected override void OnUpdate()
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
+
             var entity = SystemAPI.GetSingletonEntity<UsedCurrencyList>();
 
-            foreach (var (eventCurrency, eventCurrencyID, eventEntity) in SystemAPI.Query<RefRO<CurrencyResetEvent>, RefRO<CurrencyId>>().WithEntityAccess())
+            foreach (var (getCurrencyEvent, eventEntity) in SystemAPI.Query<RefRW<GetCurrenciesAmountEvent>>().WithEntityAccess())
             {
+                Dictionary<int, int> mapCurrencies = new Dictionary<int, int>();
                 var currencies = SystemAPI.GetBuffer<CurrencyEntityReferenceBufferElement>(entity);
-
-                //TODO: need to use hashmap
+                 
                 for (var i = 0; i < currencies.Length; i++)
                 {
                     var currency = currencies[i].Value;
-                    var currencyID = SystemAPI.GetComponent<CurrencyId>(currency);
+                    var currencyId = SystemAPI.GetComponent<CurrencyId>(currency);
+                    var currencyAmount = SystemAPI.GetComponent<CurrencyAmount>(currency);
 
-                    if (currencyID.Id == eventCurrencyID.ValueRO.Id)
-                    {
-                        var amountComponent = new CurrencyAmount { Amount = 0 };
-                        ecb.SetComponent(currency, amountComponent);
-                        ecb.AddComponent(currency, new CurrencyHasChangedTag());
-
-                        break;
-                    }
+                    mapCurrencies.Add(currencyId.Id, currencyAmount.Amount);
                 }
 
+                OnAmountGetRequestDone?.Invoke(mapCurrencies);
                 ecb.DestroyEntity(eventEntity);
             }
 

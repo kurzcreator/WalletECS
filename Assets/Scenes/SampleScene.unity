@@ -749,12 +749,36 @@ MonoBehaviour:
   currencyWidgets:
   - {fileID: 6884787414633452546}
   - {fileID: 323042537}
+--- !u!114 &668921633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5477490295405239069, guid: 1a7728534958098498478bef3977dd2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5405456843966994128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1178787280 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4316262269331201488, guid: 1a7728534958098498478bef3977dd2a,
     type: 3}
   m_PrefabInstance: {fileID: 5405456843966994128}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1424616883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2972356347447043373, guid: 1a7728534958098498478bef3977dd2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5405456843966994128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1800631715
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +945,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5312067771884596383, guid: 1a7728534958098498478bef3977dd2a,
+        type: 3}
+      propertyPath: loadButton
+      value: 
+      objectReference: {fileID: 1424616883}
+    - target: {fileID: 5312067771884596383, guid: 1a7728534958098498478bef3977dd2a,
+        type: 3}
+      propertyPath: saveButton
+      value: 
+      objectReference: {fileID: 668921633}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
