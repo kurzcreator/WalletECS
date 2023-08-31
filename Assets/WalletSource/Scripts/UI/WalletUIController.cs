@@ -48,7 +48,6 @@ public class WalletUIController : MonoBehaviour
 
     private void IncrementCurrency(int value, CurrencyType currencyType)
     {
-        Debug.Log($"Increment {value} {currencyType}");
         var currencyChangeEventEntity = entityManager.CreateEntity();
         entityManager.AddComponentData(currencyChangeEventEntity, new CurrencyId { Id = (int)currencyType });
         entityManager.AddComponentData(currencyChangeEventEntity, new CurrencyChangeEvent { Value = value });
@@ -56,7 +55,6 @@ public class WalletUIController : MonoBehaviour
 
     private void ResetCurrency(CurrencyType currencyType)
     {
-        Debug.Log($"Reset {currencyType}");
         var currencyResetEventEntity = entityManager.CreateEntity();
         entityManager.AddComponentData(currencyResetEventEntity, new CurrencyId { Id = (int)currencyType });
         entityManager.AddComponentData(currencyResetEventEntity, new CurrencyResetEvent());
