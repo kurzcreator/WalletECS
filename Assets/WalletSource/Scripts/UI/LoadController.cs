@@ -65,6 +65,7 @@ namespace GameCurrency
         private void SaveCurrenciesAmount(Dictionary<int, int> hashMap)
         {
             Dictionary<CurrencyType, int> currenciesDictionary = hashMap.ToDictionary(c => (CurrencyType)c.Key, c => c.Value);
+            loader.Save(currenciesDictionary);
         }
 
         private void LoadCurrenciesAmount()
