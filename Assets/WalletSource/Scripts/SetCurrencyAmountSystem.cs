@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Unity.Collections;
 using Unity.Entities;
 
@@ -6,6 +7,7 @@ namespace GameCurrency
     public partial class SetCurrencyAmountSystem : SystemBase
     {
         public NativeHashMap<int, int> currenciesHashMap;
+
         protected override void OnCreate()
         {
             base.OnCreate();
@@ -19,14 +21,15 @@ namespace GameCurrency
 
             foreach (var (setCurrencyEvent, eventEntity) in SystemAPI.Query<RefRW<SetCurrenciesAmountEvent>>().WithEntityAccess())
             {
+                ecb.DestroyEntity(eventEntity);
+                
+                var currencies = SystemAPI.GetBuffer<CurrencyEntityReferenceBufferElement>(entity);
+                
                 if (currenciesHashMap.IsEmpty)
                 {
                     break;
                 }
-                
-                var currencies = SystemAPI.GetBuffer<CurrencyEntityReferenceBufferElement>(entity);
-                
-                //TODO: need refactor
+
                 foreach (var item in currenciesHashMap)
                 {
                     for (int i = 0; i < currencies.Length; i++)
@@ -42,12 +45,15 @@ namespace GameCurrency
                     }
                 }
 
-                ecb.DestroyEntity(eventEntity);
             }
 
             ecb.Playback(EntityManager);
             ecb.Dispose();
 
+            if (currenciesHashMap.IsCreated)
+            {
+                currenciesHashMap.Dispose();
+            }
         }
 
         protected override void OnDestroy()

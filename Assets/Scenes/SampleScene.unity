@@ -947,6 +947,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5312067771884596383, guid: 1a7728534958098498478bef3977dd2a,
         type: 3}
+      propertyPath: LoaderType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5312067771884596383, guid: 1a7728534958098498478bef3977dd2a,
+        type: 3}
       propertyPath: loadButton
       value: 
       objectReference: {fileID: 1424616883}

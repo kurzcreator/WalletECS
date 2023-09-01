@@ -78,7 +78,7 @@ namespace GameCurrency
                     return;
                 }
 
-                NativeHashMap<int, int> currencyHashMap = new NativeHashMap<int, int>();
+                NativeHashMap<int, int> currencyHashMap = new NativeHashMap<int, int>(currenciesDictionary.Count, Allocator.TempJob);
 
                 foreach (var item in currenciesDictionary)
                 {
