@@ -87,7 +87,7 @@ namespace GameCurrency
                 
                 setCurrenciesAmountSystem.currenciesHashMap = currencyHashMap;
                 var currencyLoadEventEntity = entityManager.CreateEntity();
-                entityManager.AddComponentData  (currencyLoadEventEntity, new SetCurrenciesAmountEvent());
+                entityManager.AddComponentData(currencyLoadEventEntity, new SetCurrenciesAmountEvent());
             }
 
             loader.Load(LoadingDoneCallback);

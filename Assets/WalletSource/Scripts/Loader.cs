@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
-using Unity.Serialization.Json;
 using UnityEngine;
 
 namespace GameCurrency
@@ -51,6 +49,8 @@ namespace GameCurrency
                         break;
                 }
             }
+
+            PlayerPrefs.Save();
         }
     }
 
@@ -81,7 +81,6 @@ namespace GameCurrency
 
         public async void Save(Dictionary<CurrencyType, int> data)
         {
-
             using (StreamWriter stream = new StreamWriter(Path)) 
             {
                 try
